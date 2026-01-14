@@ -1,0 +1,101 @@
+:root {
+  --brand: #e50914;
+  /* backgrounds */
+  --bg: #141414;
+  --bg-card: #222222;
+  --bg-modal: #181818;
+  --bg-overlay: rgba(0, 0, 0, 0.9);
+  --bg-input: rgba(0, 0, 0, 0.75);
+  --bg-button: #2a2a2a;
+  --bg-button-hover: rgba(255, 255, 255, 0.1);
+  /* text */
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-hover: #e5e5e5;
+  --text-inverse: #000000;
+  --highlight: #ffffff;
+  /* borders and dividers */
+  --border-color: #404040;
+  --border-hover: #ffffff;
+  /* skeletons */
+  --skeleton-base: #222222;
+  --skeleton-highlight: #333333;
+  /* misc */
+  --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  --hero-overlay: rgba(0, 0, 0, 0.5);
+}
+
+body.light {
+  --bg: #f0f2f5;
+  --bg-card: #ffffff;
+  --bg-modal: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.95);
+  --bg-input: #e4e6eb;
+  --bg-button: #e4e6eb;
+  --bg-button-hover: #d8dadf;
+  --text-primary: #050505;
+  --text-secondary: #65676b;
+  --text-hover: #e50914;
+  --text-inverse: #ffffff;
+  --highlight: #050505;
+  --border-color: #ced0d4;
+  --border-hover: #8a8d91;
+  --skeleton-base: #e4e6eb;
+  --skeleton-highlight: #f0f2f5;
+  --text-shadow: none;
+  --hero-overlay: rgba(255, 255, 255, 0.295);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  border: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  max-width: 100vw;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #706f6f;
+  border: 4px solid #2d2d2d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #939393;
+  border: 4px solid #141414;
+}

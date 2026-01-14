@@ -1,0 +1,83 @@
+.row-category {
+  padding: 0;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.row-category:hover {
+  z-index: 50;
+}
+
+.row-title {
+  padding: 0 3%;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.row-slider {
+  position: relative;
+}
+
+.row-carrousel {
+  padding: 15px 3%;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  /* firefox */
+}
+
+.row-carrousel::-webkit-scrollbar {
+  display: none;
+  /* resto de navegadores */
+}
+
+.row-item-wrapper {
+  margin-right: 0.3px;
+  z-index: 1;
+  transition: z-index 0s;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 15px;
+  bottom: 0;
+  width: 60px;
+  height: 155px;
+  background-color: var(--bg-overlay);
+  color: var(--text-primary);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.row-slider:hover .slider-arrow {
+  opacity: 1;
+}
+
+.slider-arrow.left {
+  left: 0;
+}
+
+.slider-arrow.right {
+  right: 0;
+}
+
+.slider-arrow svg {
+  font-size: 2.5rem;
+  transition: transform 0.2s;
+}
+
+.slider-arrow:hover svg {
+  transform: scale(1.2);
+}
+
+.slider-arrow.hidden {
+  display: none;
+}

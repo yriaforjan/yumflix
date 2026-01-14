@@ -1,0 +1,49 @@
+.loader-overlay {
+  position: fixed;
+  max-height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+}
+
+.loader-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: none;
+}
+
+.loader-logo {
+  width: 300px;
+  height: auto;
+}
+
+.loader-overlay.visible .loader-logo {
+  animation: heartbeat 1.5s infinite ease-in-out;
+  filter: drop-shadow(0 0 5px rgba(229, 9, 20, 0.6));
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

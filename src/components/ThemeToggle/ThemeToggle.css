@@ -1,0 +1,16 @@
+.theme-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.theme-btn:hover {
+  color: var(--brand);
+}

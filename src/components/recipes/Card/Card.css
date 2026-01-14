@@ -1,0 +1,228 @@
+.card-container {
+  width: 250px;
+  height: 155px;
+  margin-right: 10px;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  background-color: var(--bg-card);
+  flex-shrink: 0;
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, var(--bg-overlay) 0%, transparent 100%);
+  padding: 35px 10px 10px 10px;
+  pointer-events: none;
+}
+
+.card-main-title {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-hover-modal {
+  position: absolute;
+  width: 450px;
+  height: 430px;
+  background-color: var(--bg-card);
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  z-index: 9999;
+  opacity: 0;
+  animation: spotlight 0.25s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  pointer-events: auto;
+  user-select: none;
+}
+
+@keyframes spotlight {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-img-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  background-color: var(--bg-card);
+}
+
+.modal-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-img-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25%;
+  background: linear-gradient(to top, var(--bg-card), transparent);
+}
+
+.card-info {
+  padding: 15px;
+  background-color: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.left-actions,
+.right-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  background-color: var(--bg-button);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-btn:hover {
+  border-color: var(--border-hover);
+  background-color: var(--bg-button-hover);
+  transform: scale(1.1);
+}
+
+.icon-btn.filled {
+  background-color: var(--text-primary);
+  color: var(--bg);
+  border: none;
+}
+
+.icon-btn.filled:hover {
+  background-color: var(--text-hover);
+  transform: scale(1.1);
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.card-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.match-score {
+  color: #46d369;
+}
+
+.card-genres ul {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-genres li {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.card-genres li:not(:last-child)::after {
+  content: "•";
+  color: var(--text-secondary);
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.icon-btn.added {
+  background-color: var(--text-primary);
+  color: var(--bg);
+  border-color: var(--text-primary);
+}
+
+.icon-btn.added:hover {
+  background-color: var(--text-hover);
+}
+
+.icon-btn.liked {
+  color: var(--brand);
+  border-color: var(--brand);
+  background-color: rgba(229, 9, 20, 0.1);
+}
+
+.icon-btn.liked:hover {
+  background-color: rgba(229, 9, 20, 0.2);
+  border-color: var(--brand);
+}
+
+.icon-btn:added {
+  transform: scale(0.9) !important;
+  transition: transform 0.1s ease;
+}
+
+.icon-btn.liked svg {
+  filter: drop-shadow(0 0 5px var(--brand));
+}

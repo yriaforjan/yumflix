@@ -1,0 +1,38 @@
+main {
+  min-height: calc(100vh - 50px);
+}
+
+main.page-container {
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+
+main.my-list-page,
+main.search-page,
+main.recipes-page {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+main.page-container h1 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+main.new-popular-page h1 {
+  padding-left: 3%;
+}
+
+.page-header h1 span {
+  color: var(--text-hover);
+  font-weight: bold;
+}
+
+.page-message {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 1.2rem;
+  color: var(--text-hover);
+}
