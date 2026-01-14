@@ -5,22 +5,16 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
 });
 
-/* ----- */
-/* let cachedHero = null;
-let cachedFullCatalog = null; */
-/* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA Y CAMBIAR A USECONTEXT */
 
+/* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA Y CAMBIAR A USECONTEXT */
 export const cache = {
   categories: {},
   random: null,
   fullCatalog: null,
 };
+/* ------ */
 
 // Obtener receta aleatoria -> hero
 export const getRandomMeal = async () => {
