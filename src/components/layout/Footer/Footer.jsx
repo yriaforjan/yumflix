@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-socials">
           <a
-            href="https://github.com/yriaforjan"
+            href="https://github.com/yriaforjan/yumflix.git"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
@@ -16,7 +16,7 @@ const Footer = () => {
             <FaGithub />
           </a>
           <a
-            href="https://linkedin.com/yria-forjan-oliveira"
+            href="www.linkedin.com/in/yria-forjan-oliveira"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
