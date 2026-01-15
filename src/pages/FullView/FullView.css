@@ -8,13 +8,13 @@
   z-index: 2000;
   overflow-y: auto;
   color: var(--text-primary);
-  animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 @keyframes slideUp {
   from {
     transform: translateY(100%);
-    opacity: 0;
+    opacity: 0.5;
   }
 
   to {
