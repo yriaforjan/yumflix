@@ -96,6 +96,8 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                   <button
                     className="icon-btn filled"
                     onClick={() => openFullView(source)}
+                    title="Play"
+                    aria-label="Play"
                   >
                     <FaPlay />
                   </button>
@@ -104,6 +106,9 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                     className={`icon-btn ${isInList ? "added" : ""}`}
                     onClick={() => toggleMyList(source)}
                     title={isInList ? "Remove from My List" : "Add to My List"}
+                    aria-label={
+                      isInList ? "Remove from My List" : "Add to My List"
+                    }
                   >
                     {isInList ? <FaCheck /> : <FaPlus />}
                   </button>
@@ -111,7 +116,8 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                   <button
                     className={`icon-btn ${isLiked ? "liked" : ""}`}
                     onClick={() => toggleLike(recipe.id)}
-                    title="Like"
+                    title={isLiked ? "Unlike" : "Like"}
+                    aria-label={isLiked ? "Unlike" : "Like"}
                   >
                     <FaThumbsUp />
                   </button>
@@ -120,6 +126,8 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                   <button
                     className="icon-btn"
                     onClick={() => openModal(source)}
+                    title="More info"
+                    aria-label="More info"
                   >
                     <FaChevronDown />
                   </button>

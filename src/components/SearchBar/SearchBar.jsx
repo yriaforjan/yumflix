@@ -67,6 +67,7 @@ const SearchBar = () => {
         onClick={handleSearchClick}
         type="button"
         onMouseDown={(e) => e.preventDefault()}
+        aria-label="Search"
       >
         <FaSearch />
       </button>
@@ -90,6 +91,7 @@ const SearchBar = () => {
           onClick={handleClearClick}
           type="button"
           onMouseDown={(e) => e.preventDefault()}
+          aria-label="Clear search"
         >
           <FaTimes />
         </button>

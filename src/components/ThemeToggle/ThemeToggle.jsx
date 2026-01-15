@@ -26,6 +26,7 @@ const ThemeToggle = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {showSolidIcon ? <FaLightbulb /> : <FaRegLightbulb />}
     </button>

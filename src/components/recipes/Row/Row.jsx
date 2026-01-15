@@ -86,12 +86,13 @@ const Row = ({ title, category, data }) => {
 
       <div className="row-slider">
         {!isLoading && (
-          <div
+          <button
             className={`slider-arrow left ${!showLeftArrow ? "hidden" : ""}`}
             onClick={() => handleScrollClick("left")}
+            aria-label="Scroll left"
           >
             <FaChevronLeft />
-          </div>
+          </button>
         )}
 
         <ul className="row-carrousel" ref={rowRef} onScroll={handleScroll}>
@@ -113,12 +114,13 @@ const Row = ({ title, category, data }) => {
         </ul>
 
         {!isLoading && (
-          <div
+          <button
             className={`slider-arrow right ${!showRightArrow ? "hidden" : ""}`}
             onClick={() => handleScrollClick("right")}
+            aria-label="Scroll right"
           >
             <FaChevronRight />
-          </div>
+          </button>
         )}
       </div>
     </section>

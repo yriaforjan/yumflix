@@ -22,7 +22,11 @@ const Modal = () => {
     <Portal>
       <div className="modal-overlay" onClick={closeModal}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-close-btn" onClick={closeModal}>
+          <button
+            className="modal-close-btn"
+            onClick={closeModal}
+            aria-label="Close modal"
+          >
             <FaTimes />
           </button>
 
@@ -44,6 +48,9 @@ const Modal = () => {
                 <button
                   className={`icon-btn round ${isInList ? "active" : ""}`}
                   onClick={() => toggleMyList(content)}
+                  aria-label={
+                    isInList ? "Remove from My List" : "Add to My List"
+                  }
                 >
                   {isInList ? <FaCheck /> : <FaPlus />}
                 </button>
@@ -51,6 +58,7 @@ const Modal = () => {
                 <button
                   className={`icon-btn round ${isLiked ? "liked" : ""}`}
                   onClick={() => toggleLike(content.id)}
+                  aria-label={isLiked ? "Unlike" : "Like"}
                 >
                   <FaThumbsUp />
                 </button>
