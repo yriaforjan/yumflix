@@ -3,10 +3,15 @@ import { useState, useEffect } from "react";
 import logo from "../../../assets/logo.png";
 import SearchBar from "../../SearchBar/SearchBar";
 import ThemeToggle from "../../ThemeToggle/ThemeToggle";
+import { FaBars, FaTimes } from "react-icons/fa";
+import useBodyScrollLock from "../../../hooks/useBodyScrollLock";
 import "./Header.css";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useBodyScrollLock(isMenuOpen);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,66 +21,103 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <nav className="header-nav">
         <div className="header-logo">
-          <Link to="/">
+          <Link to="/" onClick={closeMenu}>
             <img src={logo} alt="Yumflix logo" />
           </Link>
+          <button
+            className="header-burger"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <FaBars />
+          </button>
         </div>
-        <ul className="header-menu">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
+        <div className={`header-menu-container ${isMenuOpen ? "open" : ""}`}>
+          <div className="mobile-menu-header">
+            <img src={logo} alt="Yumflix logo" className="mobile-menu-logo" />
+            <button
+              className="mobile-close-btn"
+              onClick={closeMenu}
+              aria-label="Close menu"
             >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/recipes"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-            >
-              Recipes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/new"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-            >
-              New & Popular
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-list"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-            >
-              My list
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/countries"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-            >
-              Browse by Region
-            </NavLink>
-          </li>
-        </ul>
+              <FaTimes />
+            </button>
+          </div>
+          <ul className="header-menu">
+            <li>
+              <NavLink
+                to="/"
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/recipes"
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Recipes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/new"
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                New & Popular
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/my-list"
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                My list
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/countries"
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Browse by Region
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        <div
+          className={`mobile-menu-overlay ${isMenuOpen ? "open" : ""}`}
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
       </nav>
       <div className="header-controls">
         <SearchBar />
