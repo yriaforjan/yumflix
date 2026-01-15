@@ -81,3 +81,14 @@
 .slider-arrow.hidden {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .slider-arrow {
+    display: none;
+  }
+
+  .row-carrousel {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}

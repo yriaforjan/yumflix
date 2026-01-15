@@ -143,3 +143,58 @@
   background-image: linear-gradient(180deg, transparent, var(--bg));
   pointer-events: none;
 }
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 67vh;
+  }
+
+  .hero-content {
+    padding-top: 80px;
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    width: 100%;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .hero-tags {
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-buttons {
+    width: auto;
+    gap: 1rem;
+  }
+
+  .hero-btn {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+    flex: 0 1 auto;
+    justify-content: center;
+    margin-right: 0;
+  }
+}
