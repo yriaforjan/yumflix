@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { getRecipesByTerm } from "../../services/api";
 import Grid from "../../components/recipes/Grid/Grid";
 
@@ -8,26 +8,39 @@ const SearchResult = () => {
   const [isSearching, setIsSearching] = useState(false);
 
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const query = searchParams.get("q");
 
   useEffect(() => {
     if (!query) return;
 
+    let isMounted = true;
+
     const fetchResults = async () => {
       setIsSearching(true);
       try {
         const data = await getRecipesByTerm(query);
-        setResults(data || []);
+        if (isMounted) {
+          setResults(data || []);
+        }
       } catch (error) {
         console.error("Search error:", error);
-        setResults([]);
+        if (isMounted) {
+          navigate("/error");
+        }
       } finally {
-        setIsSearching(false);
+        if (isMounted) {
+          setIsSearching(false);
+        }
       }
     };
 
     fetchResults();
-  }, [query]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [query, navigate]);
 
   return (
     <main className="page-container search-page">
@@ -41,13 +54,13 @@ const SearchResult = () => {
         recipes={results}
         isLoading={isSearching}
         emptyMessage={
-          <>
+          <div className="search-empty">
             <p>No results found for "{query}"</p>
             <span>
               Try searching for ingredients (chicken, beef), areas (Italian,
-              Mexican), or categories.
+              Mexican) or categories.
             </span>
-          </>
+          </div>
         }
       />
     </main>

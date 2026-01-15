@@ -4,25 +4,35 @@ import { getRandomMeal } from "../../../services/api";
 import { createRecipeTags, truncateText } from "../../../utils/formatters";
 import { useLoader } from "../../../context/LoaderContext/LoaderContext";
 import { useModal } from "../../../context/ModalContext/ModalContext";
+import { useNavigate } from "react-router-dom";
 import HeroSkeleton from "./HeroSkeleton";
 import "./Hero.css";
 
 const Hero = () => {
   const [recipe, setRecipe] = useState(null);
+  const navigate = useNavigate();
 
   const { appLoaded } = useLoader();
   const { openModal, openFullView } = useModal();
 
   useEffect(() => {
     const fetchRandomMeal = async () => {
-      const data = await getRandomMeal();
-      if (data) {
-        setRecipe(data);
+      try {
+        const data = await getRandomMeal();
+        if (data) {
+          setRecipe(data);
+        } else {
+          navigate("/error");
+        }
+      } catch (error) {
+        console.error("Hero Error:", error);
+        navigate("/error");
+      } finally {
+        appLoaded();
       }
-      appLoaded();
     };
     fetchRandomMeal();
-  }, [appLoaded]);
+  }, [appLoaded, navigate]);
 
   if (!recipe) return <HeroSkeleton />;
 

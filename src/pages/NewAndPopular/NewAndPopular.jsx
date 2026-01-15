@@ -1,26 +1,42 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getLatestRecipes } from "../../services/api";
 import Row from "../../components/recipes/Row/Row";
 
 const NewAndPopular = () => {
   const [latestRecipes, setLatestRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchLatest = async () => {
       try {
         setIsLoading(true);
         const data = await getLatestRecipes();
-        setLatestRecipes(data);
+
+        if (isMounted) {
+          setLatestRecipes(data);
+        }
       } catch (error) {
         console.error("Error al cargar novedades:", error);
+        if (isMounted) {
+          navigate("/error");
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchLatest();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [navigate]);
 
   return (
     <main className="page-container new-popular-page">
@@ -28,21 +44,16 @@ const NewAndPopular = () => {
         <h1>New & Popular</h1>
       </div>
 
-      {isLoading ? (
-        <div className="page-message">
-          <p>Fetching the latest culinary trends...</p>
-        </div>
-      ) : (
-        <div className="rows-container">
-          <Row title="New on Yumflix" data={latestRecipes} />
-
-          <Row title="Top 10 Global Hits" category="Chicken" />
-          <Row title="International Favorites" category="Pasta" />
-          <Row title="Hidden Gems: Mediterranean" category="Lamb" />
-          <Row title="Perfect for Sharing" category="Side" />
-          <Row title="Bingeworthy Appetizers" category="Starter" />
-        </div>
-      )}
+      <div className="rows-container">
+        {(isLoading || latestRecipes.length > 0) && (
+          <Row title="New on Yumflix" data={isLoading ? null : latestRecipes} />
+        )}
+        <Row title="Top 10 Global Hits" category="Chicken" />
+        <Row title="International Favorites" category="Pasta" />
+        <Row title="Hidden Gems: Mediterranean" category="Lamb" />
+        <Row title="Perfect for Sharing" category="Side" />
+        <Row title="Bingeworthy Appetizers" category="Starter" />
+      </div>
 
       {!isLoading && latestRecipes.length === 0 && (
         <div className="page-message">

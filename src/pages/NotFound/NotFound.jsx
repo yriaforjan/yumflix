@@ -19,12 +19,9 @@ const NotFound = () => {
         Sorry, we can't find that page. You'll find lots to explore on the home
         page.
       </p>
-
-      <div className="not-found-buttons">
-        <button onClick={() => navigate("/")} className="btn-primary">
-          Back Home
-        </button>
-      </div>
+      <button onClick={() => navigate("/")} className="btn-primary">
+        Back Home
+      </button>
     </div>
   );
 };

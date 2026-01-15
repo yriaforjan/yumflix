@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getMealById } from "../../services/api";
 import { FaArrowLeft, FaUtensils, FaClock } from "react-icons/fa";
 import { cleanText } from "../../utils/formatters";
-import NotFound from "../NotFound/NotFound";
 import "./FullView.css";
 
 const FullView = () => {
@@ -14,26 +13,44 @@ const FullView = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
+      setLoading(true);
       try {
         const data = await getMealById(id);
-        setRecipe(data);
+
+        if (isMounted) {
+          if (!data) {
+            navigate("/not-found", { replace: true });
+            return;
+          }
+          setRecipe(data);
+        }
       } catch (error) {
-        console.error("Error fetching recipe", error);
+        console.error("Error fetching recipe:", error);
+        if (isMounted) {
+          navigate("/error");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchData();
-  }, [id]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id, navigate]);
 
   const handleClose = () => {
     navigate(-1);
   };
 
-  if (loading) return null;
-  if (!recipe) return <NotFound />;
+  if (loading || !recipe) return null;
 
   const steps = recipe.description
     ? cleanText(recipe.description)
@@ -44,9 +61,10 @@ const FullView = () => {
 
   return (
     <>
-      <button className="back-btn" onClick={handleClose}>
+      <button className="back-btn" onClick={handleClose} aria-label="Volver">
         <FaArrowLeft />
       </button>
+
       <div className="full-view-container">
         <div
           className="recipe-header"
@@ -59,6 +77,7 @@ const FullView = () => {
             <p className="recipe-origin">{recipe.area} Cuisine</p>
           </div>
         </div>
+
         <div className="recipe-container">
           <aside className="recipe-sidebar">
             <div className="sidebar-content">
@@ -71,7 +90,7 @@ const FullView = () => {
                     const name = typeof ing === "object" ? ing.name : ing;
                     const measure = typeof ing === "object" ? ing.measure : "";
                     return (
-                      <li key={i}>
+                      <li key={`${id}-ing-${i}`}>
                         <span className="measure">{measure}</span>
                         <span className="name">{name}</span>
                       </li>
@@ -80,22 +99,20 @@ const FullView = () => {
               </ul>
             </div>
           </aside>
+
           <main className="recipe-content">
             <h3>
               <FaClock /> Instructions
             </h3>
             <ul className="steps-list">
-              {/* revisar key!!!!!! */}
               {steps.length > 0 ? (
                 steps.map((step, i) => (
-                  <li key={i} className="step-item">
+                  <li key={`${id}-step-${i}`} className="step-item">
                     <span className="step-number">{i + 1}</span>
                     <p>{step}</p>
                   </li>
                 ))
               ) : (
-                /* !!!!!!!!!!!! */
-
                 <p className="block-text">
                   No detailed instructions available for this recipe.
                 </p>

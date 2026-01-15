@@ -9,6 +9,7 @@ import FullView from "./pages/FullView/FullView";
 import NotFound from "./pages/NotFound/NotFound";
 import NewAndPopular from "./pages/NewAndPopular/NewAndPopular";
 import SearchResult from "./pages/SearchResult/SearchResult";
+import Error from "./pages/Error/Error";
 import "./App.css";
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         </Route>
         {/* Rutas SIN Header: */}
         <Route path="/watch/:id" element={<FullView />} />
+        <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

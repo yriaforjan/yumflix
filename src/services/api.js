@@ -7,7 +7,6 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-
 /* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA Y CAMBIAR A USECONTEXT */
 export const cache = {
   categories: {},
@@ -19,6 +18,7 @@ export const cache = {
 // Obtener receta aleatoria -> hero
 export const getRandomMeal = async () => {
   if (cache.random) return cache.random;
+
   try {
     const response = await api.get("random.php");
     const meal = response.data.meals
@@ -27,8 +27,8 @@ export const getRandomMeal = async () => {
     cache.random = meal;
     return meal;
   } catch (error) {
-    console.error("Error obteniendo la receta aleatoria:", error);
-    return null;
+    console.error("Error fetching random meal:", error.message);
+    throw error;
   }
 };
 
@@ -44,11 +44,8 @@ export const getMealsByCategory = async (category) => {
     cache.categories[category] = meals;
     return meals;
   } catch (error) {
-    console.error(
-      `Error obteniendo las recetas de la categoría ${category}:`,
-      error
-    );
-    return [];
+    console.error(`Error fetching category ${category}:`, error.message);
+    throw error;
   }
 };
 
@@ -58,8 +55,8 @@ export const getMealById = async (id) => {
     const response = await api.get(`lookup.php?i=${id}`);
     return response.data.meals ? normalizeMeal(response.data.meals[0]) : null;
   } catch (error) {
-    console.error("Error obteniendo los detalles de la receta", error);
-    return null;
+    console.error("Error fetching recipe details:", error.message);
+    throw error;
   }
 };
 
@@ -94,8 +91,8 @@ export const getRecipesByTerm = async (term) => {
 
     return uniqueMeals.map(normalizeMeal);
   } catch (error) {
-    console.error(`Error en búsqueda global para: ${term}`, error);
-    return [];
+    console.error(`Error searching ${term}:`, error.message);
+    throw error;
   }
 };
 
@@ -106,8 +103,8 @@ export const getLatestRecipes = async () => {
     const meals = res.data.meals || [];
     return meals.map(normalizeMeal);
   } catch (error) {
-    console.error("Error obteniendo las recetas recientes:", error);
-    return [];
+    console.error("Error fetching latest recipes:", error.message);
+    throw error;
   }
 };
 
@@ -135,7 +132,7 @@ export const getAllRecipes = async () => {
 
     return normalizedData;
   } catch (error) {
-    console.error("Error fetching full catalog with API Key:", error);
-    return [];
+    console.error("Error fetching full catalog:", error.message);
+    throw error;
   }
 };

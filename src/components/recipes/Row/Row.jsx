@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { getMealsByCategory } from "../../../services/api";
 import Card from "../Card/Card";
@@ -43,6 +44,8 @@ const Row = ({ title, category, data }) => {
     }
   }, []);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (data) {
       setIsLoading(false);
@@ -57,7 +60,10 @@ const Row = ({ title, category, data }) => {
           const res = await getMealsByCategory(category);
           if (isMounted) setCategoryRecipes(res);
         } catch (error) {
-          console.error(`Error fetching category ${category}:`, error);
+          console.error(`Error at row ${category}:`, error.message);
+          if (isMounted) {
+            navigate("/error");
+          }
         } finally {
           if (isMounted) setIsLoading(false);
         }
@@ -68,7 +74,11 @@ const Row = ({ title, category, data }) => {
     return () => {
       isMounted = false;
     };
-  }, [category, data]);
+  }, [category, data, navigate]);
+
+  if (!isLoading && recipes.length === 0) {
+    return null;
+  }
 
   return (
     <section className="row-category">
