@@ -226,3 +226,14 @@
 .icon-btn.liked svg {
   filter: drop-shadow(0 0 5px var(--brand));
 }
+
+@media (max-width: 768px) {
+  .card-container:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+  }
+
+  .card-hover-modal {
+    display: none !important;
+  }
+}

@@ -157,6 +157,16 @@
 }
 
 @media (max-width: 768px) {
+  .modal-overlay {
+    align-items: center;
+  }
+
+  .modal-content {
+    margin: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
   .modal-body {
     flex-direction: column;
     padding: 1.5rem;
@@ -173,6 +183,14 @@
   .modal-header-info {
     left: 1.5rem;
     width: 90%;
+  }
+
+  .modal-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+    overflow: hidden;
   }
 }
 

@@ -38,6 +38,7 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
   }, [isHovered, details, recipe.id]);
 
   const handleMouseEnter = (ev) => {
+    if (window.innerWidth <= 768) return;
     if (leaveTimer.current) clearTimeout(leaveTimer.current);
     if (!isHovered) calculatePosition(ev.currentTarget);
     hoverTimer.current = setTimeout(() => {
@@ -54,6 +55,23 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
     }
   };
 
+  const handleCardClick = async () => {
+    if (window.innerWidth <= 768) {
+      if (details) {
+        openModal(details);
+      } else {
+        try {
+          const fullDetails = await getMealById(recipe.id);
+          setDetails(fullDetails);
+          openModal(fullDetails);
+        } catch (error) {
+          console.error("Error fetching details on click:", error);
+          openModal(recipe);
+        }
+      }
+    }
+  };
+
   const handlePortalEnter = () => {
     if (leaveTimer.current) clearTimeout(leaveTimer.current);
   };
@@ -66,6 +84,7 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
       className="card-container"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleCardClick}
     >
       <div className="card-image-wrapper">
         <img src={recipe.image} alt={recipe.title} className="card-img" />
