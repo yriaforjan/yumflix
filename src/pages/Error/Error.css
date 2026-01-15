@@ -13,6 +13,12 @@
     url("/src/assets/not_found.webp");
   background-size: cover;
   background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.error-container.visible {
+  opacity: 1;
 }
 
 .error-container h1 {

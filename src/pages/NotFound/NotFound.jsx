@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext/LoaderContext";
 import "./NotFound.css";
@@ -7,12 +7,20 @@ const NotFound = () => {
   const navigate = useNavigate();
   const { setIsLoading } = useLoader();
 
+  const [imgReady, setImgReady] = useState(false);
+
   useEffect(() => {
     setIsLoading(false);
+
+    const img = new Image();
+    img.src = "/src/assets/not_found.webp";
+    img.onload = () => {
+      setImgReady(true);
+    };
   }, [setIsLoading]);
 
   return (
-    <div className="not-found-container">
+    <div className={`not-found-container ${imgReady ? "visible" : ""}`}>
       <h1>404</h1>
       <h2>Lost your way?</h2>
       <p>
