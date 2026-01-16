@@ -56,11 +56,22 @@ const SearchBar = () => {
     navigate(returnPath, { replace: true });
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        handleClearClick();
+        inputRef.current?.blur();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, handleClearClick]);
+
   return (
     <div
-      className={`search-box ${isOpen ? "open" : ""} ${
-        hasText ? "has-text" : ""
-      }`}
+      className={`search-box ${isOpen ? "open" : ""} ${hasText ? "has-text" : ""
+        }`}
+      role="search"
     >
       <button
         className="search-btn"
@@ -68,6 +79,7 @@ const SearchBar = () => {
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         aria-label="Search"
+        aria-expanded={isOpen}
       >
         <FaSearch />
       </button>
@@ -77,6 +89,7 @@ const SearchBar = () => {
         type="text"
         className="search-input"
         placeholder="Recipes, areas, ingredients"
+        aria-label="Search recipes, areas, ingredients"
         defaultValue={query}
         onChange={handleInputChange}
         onFocus={() => setIsManualFocused(true)}

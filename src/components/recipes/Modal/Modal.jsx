@@ -13,6 +13,16 @@ const Modal = () => {
 
   useBodyScrollLock(isOpen);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeModal]);
+
   if (!isOpen || !content) return null;
 
   const isInList = myList.some((item) => item.id === content.id);
@@ -21,7 +31,13 @@ const Modal = () => {
   return (
     <Portal>
       <div className="modal-overlay" onClick={closeModal}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="modal-content"
+          onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
           <button
             className="modal-close-btn"
             onClick={closeModal}
@@ -35,7 +51,9 @@ const Modal = () => {
             <div className="modal-header-gradient" />
 
             <div className="modal-header-info">
-              <h1 className="modal-title">{content.title}</h1>
+              <h1 id="modal-title" className="modal-title">
+                {content.title}
+              </h1>
 
               <div className="modal-buttons">
                 <button
@@ -84,9 +102,9 @@ const Modal = () => {
                 <span className="value">
                   {content.ingredients && content.ingredients.length > 0
                     ? content.ingredients
-                        .slice(0, 5)
-                        .map((item) => item.name)
-                        .join(", ")
+                      .slice(0, 5)
+                      .map((item) => item.name)
+                      .join(", ")
                     : "See full details..."}
                   {content.ingredients &&
                     content.ingredients.length > 6 &&

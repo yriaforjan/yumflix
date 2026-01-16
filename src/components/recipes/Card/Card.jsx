@@ -79,15 +79,26 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
   const source = details || recipe;
   const tags = createRecipeTags(source, 2);
 
+  const handleKeyDown = (ev) => {
+    if (ev.key === "Enter" || ev.key === " ") {
+      ev.preventDefault();
+      handleCardClick();
+    }
+  };
+
   return (
     <div
       className="card-container"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex="0"
+      aria-label={`View details for ${recipe.title}`}
     >
       <div className="card-image-wrapper">
-        <img src={recipe.image} alt={recipe.title} className="card-img" />
+        <img src={recipe.image} alt="" className="card-img" />
         <div className="card-overlay">
           <h4 className="card-main-title">{recipe.title}</h4>
         </div>

@@ -31,18 +31,25 @@ const Header = () => {
             className="header-burger"
             onClick={toggleMenu}
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
             <FaBars />
           </button>
         </div>
 
-        <div className={`header-menu-container ${isMenuOpen ? "open" : ""}`}>
+        <div
+          className={`header-menu-container ${isMenuOpen ? "open" : ""}`}
+          role="dialog"
+          aria-label="Mobile Navigation"
+          aria-modal="true"
+        >
           <div className="mobile-menu-header">
             <img src={logo} alt="Yumflix logo" className="mobile-menu-logo" />
             <button
               className="mobile-close-btn"
               onClick={closeMenu}
               aria-label="Close menu"
+              aria-expanded={isMenuOpen}
             >
               <FaTimes />
             </button>
@@ -56,6 +63,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
               >
                 Home
               </NavLink>
@@ -67,6 +75,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
               >
                 Recipes
               </NavLink>
@@ -78,6 +87,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
               >
                 New & Popular
               </NavLink>
@@ -89,6 +99,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
               >
                 My list
               </NavLink>
@@ -100,6 +111,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
+                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
               >
                 Browse by Region
               </NavLink>

@@ -41,6 +41,7 @@ const Hero = () => {
   return (
     <section
       className="hero"
+      aria-label="Featured Recipe"
       style={{
         "--bg-image": `url("${recipe.image}")`,
       }}

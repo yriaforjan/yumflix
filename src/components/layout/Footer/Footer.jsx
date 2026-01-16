@@ -4,7 +4,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer role="contentinfo">
       <div className="footer-container">
         <div className="footer-socials">
           <a
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-grid">
-          <ul className="footer-links">
+          <ul className="footer-links" aria-label="Footer Navigation">
             <li className="footer-link-item">
               <Link to="#" className="footer-link">
                 Contact Us
