@@ -39,6 +39,11 @@
   transition: z-index 0s;
 }
 
+.row-item-wrapper .card-skeleton-container {
+  width: 250px;
+  margin-right: 10px;
+}
+
 .slider-arrow {
   position: absolute;
   top: 15px;

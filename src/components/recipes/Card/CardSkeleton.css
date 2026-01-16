@@ -1,7 +1,6 @@
 .card-skeleton-container {
-  width: 250px;
-  height: 155px;
-  margin-right: 10px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 4px;
   background-color: var(--skeleton-base);
   flex-shrink: 0;

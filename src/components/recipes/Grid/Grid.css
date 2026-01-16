@@ -45,7 +45,8 @@
     padding: 0;
   }
 
-  .recipe-grid .card-container {
+  .recipe-grid .card-container,
+  .recipe-grid .card-skeleton-container {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
