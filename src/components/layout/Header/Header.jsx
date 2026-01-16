@@ -4,14 +4,12 @@ import logo from "../../../assets/logo.png";
 import SearchBar from "../../SearchBar/SearchBar";
 import ThemeToggle from "../../ThemeToggle/ThemeToggle";
 import { FaBars, FaTimes } from "react-icons/fa";
-import useBodyScrollLock from "../../../hooks/useBodyScrollLock";
+import useMenu from "../../../hooks/useMenu";
 import "./Header.css";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useBodyScrollLock(isMenuOpen);
+  const { isMenuOpen, toggleMenu, closeMenu } = useMenu();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,14 +19,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <nav className="header-nav">
@@ -37,6 +27,7 @@ const Header = () => {
             <img src={logo} alt="Yumflix logo" />
           </Link>
           <button
+            id="menu-toggle"
             className="header-burger"
             onClick={toggleMenu}
             aria-label="Toggle menu"
@@ -44,6 +35,7 @@ const Header = () => {
             <FaBars />
           </button>
         </div>
+
         <div className={`header-menu-container ${isMenuOpen ? "open" : ""}`}>
           <div className="mobile-menu-header">
             <img src={logo} alt="Yumflix logo" className="mobile-menu-logo" />
@@ -55,6 +47,7 @@ const Header = () => {
               <FaTimes />
             </button>
           </div>
+
           <ul className="header-menu">
             <li>
               <NavLink
@@ -113,12 +106,14 @@ const Header = () => {
             </li>
           </ul>
         </div>
+
         <div
           className={`mobile-menu-overlay ${isMenuOpen ? "open" : ""}`}
           onClick={closeMenu}
           aria-hidden="true"
         />
       </nav>
+
       <div className="header-controls">
         <SearchBar />
         <ThemeToggle />
