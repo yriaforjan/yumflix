@@ -54,13 +54,13 @@ const SearchResult = () => {
         recipes={results}
         isLoading={isSearching}
         emptyMessage={
-          <div className="search-empty">
+          <>
             <p>No results found for "{query}"</p>
             <span>
               Try searching for ingredients (chicken, beef), areas (Italian,
               Mexican) or categories.
             </span>
-          </div>
+          </>
         }
       />
     </main>

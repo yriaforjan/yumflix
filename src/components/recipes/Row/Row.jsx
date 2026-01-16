@@ -1,23 +1,20 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { getMealsByCategory } from "../../../services/api";
+import { getMealsByCategory, getMealsByArea } from "../../../services/api";
 import Card from "../Card/Card";
 import CardSkeleton from "../Card/CardSkeleton";
 import "./Row.css";
 
-const Row = ({ title, category, data }) => {
-  const [categoryRecipes, setCategoryRecipes] = useState([]);
+const Row = ({ title, category, area, data }) => {
+  const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(!data);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const rowRef = useRef(null);
 
-  const recipes = useMemo(
-    () => data || categoryRecipes,
-    [data, categoryRecipes]
-  );
+  const recipes = useMemo(() => data || meals, [data, meals]);
 
   const handleScroll = useCallback(() => {
     if (rowRef.current) {
@@ -54,13 +51,16 @@ const Row = ({ title, category, data }) => {
 
     let isMounted = true;
     const fetchRecipes = async () => {
-      if (category) {
+      const fetchMethod = area ? getMealsByArea : getMealsByCategory;
+      const term = area || category;
+
+      if (term) {
         setIsLoading(true);
         try {
-          const res = await getMealsByCategory(category);
-          if (isMounted) setCategoryRecipes(res);
+          const res = await fetchMethod(term);
+          if (isMounted) setMeals(res);
         } catch (error) {
-          console.error(`Error at row ${category}:`, error.message);
+          console.error(`Error at row ${term}:`, error.message);
           if (isMounted) {
             navigate("/error");
           }
@@ -74,7 +74,7 @@ const Row = ({ title, category, data }) => {
     return () => {
       isMounted = false;
     };
-  }, [category, data, navigate]);
+  }, [category, area, data, navigate]);
 
   if (!isLoading && recipes.length === 0) {
     return null;

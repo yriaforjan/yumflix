@@ -10,6 +10,7 @@ const api = axios.create({
 /* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA Y CAMBIAR A USECONTEXT */
 export const cache = {
   categories: {},
+  areas: {},
   random: null,
   fullCatalog: null,
 };
@@ -20,9 +21,9 @@ export const getRandomMeal = async () => {
   if (cache.random) return cache.random;
 
   try {
-    const response = await api.get("random.php");
-    const meal = response.data.meals
-      ? normalizeMeal(response.data.meals[0])
+    const res = await api.get("random.php");
+    const meal = res.data.meals
+      ? normalizeMeal(res.data.meals[0])
       : null;
     cache.random = meal;
     return meal;
@@ -37,9 +38,9 @@ export const getMealsByCategory = async (category) => {
   if (cache.categories[category]) return cache.categories[category];
   try {
     // endpoint: filter.php?c=NombreCategoria
-    const response = await api.get(`filter.php?c=${category}`);
-    const meals = response.data.meals
-      ? response.data.meals.map(normalizeMeal)
+    const res = await api.get(`filter.php?c=${category}`);
+    const meals = res.data.meals
+      ? res.data.meals.map(normalizeMeal)
       : [];
     cache.categories[category] = meals;
     return meals;
@@ -52,8 +53,8 @@ export const getMealsByCategory = async (category) => {
 // Obtener una receta por id (todos los detalles):
 export const getMealById = async (id) => {
   try {
-    const response = await api.get(`lookup.php?i=${id}`);
-    return response.data.meals ? normalizeMeal(response.data.meals[0]) : null;
+    const res = await api.get(`lookup.php?i=${id}`);
+    return res.data.meals ? normalizeMeal(res.data.meals[0]) : null;
   } catch (error) {
     console.error("Error fetching recipe details:", error.message);
     throw error;
@@ -116,9 +117,9 @@ export const getAllRecipes = async () => {
     const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789".split("");
 
     const requests = alphabet.map((char) => api.get(`search.php?f=${char}`));
-    const responses = await Promise.all(requests);
+    const res = await Promise.all(requests);
 
-    const allMeals = responses
+    const allMeals = res
       .flatMap((res) => res.data.meals)
       .filter((meal) => meal && meal !== null);
 
@@ -133,6 +134,36 @@ export const getAllRecipes = async () => {
     return normalizedData;
   } catch (error) {
     console.error("Error fetching full catalog:", error.message);
+    throw error;
+  }
+};
+
+// obtener todas las áreas o regiones
+export const getAllAreas = async () => {
+  try {
+    const res = await api.get("list.php?a=list");
+    // La API devuelve { meals: [ { strArea: "American" }, ... ] }
+    return res.data.meals || [];
+  } catch (error) {
+    console.error("Error fetching areas:", error.message);
+    throw error;
+  }
+};
+
+// obtener recetas por area
+export const getMealsByArea = async (area) => {
+  if (cache.areas[area]) return cache.areas[area];
+
+  try {
+    const res = await api.get(`filter.php?a=${area}`);
+    const meals = res.data.meals
+      ? res.data.meals.map(normalizeMeal)
+      : [];
+
+    cache.areas[area] = meals;
+    return meals;
+  } catch (error) {
+    console.error(`Error fetching meals for area ${area}:`, error.message);
     throw error;
   }
 };

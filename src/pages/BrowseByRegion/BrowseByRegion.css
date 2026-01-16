@@ -1,0 +1,144 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+}
+
+main.browse-region-page .page-header h1 {
+  display: flex;
+  align-items: center;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.filter-group label {
+  font-weight: 500;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-group select {
+  appearance: none;
+  margin-left: -0.5rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #808080;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  min-width: 150px;
+}
+
+.select-icon {
+  position: absolute;
+  right: 12px;
+  color: white;
+  pointer-events: none;
+  font-size: 1rem;
+}
+
+.filter-group select:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: #ffffff;
+}
+
+.filter-group select:focus {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.sort-wrapper.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+main.browse-region-page .recipe-grid {
+  padding: 20px 3%;
+}
+
+@media (max-width: 1024px) {
+  .page-header {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    gap: 1.5rem;
+  }
+
+  .filter-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .filter-group label {
+    font-size: 1rem;
+  }
+
+  .select-wrapper {
+    width: 100%;
+  }
+
+  .filter-group select {
+    width: 100%;
+    margin-left: 0;
+    min-width: unset;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+  }
+
+  .sort-wrapper {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    transform: none;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .sort-wrapper.visible {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+    transform: none;
+  }
+}

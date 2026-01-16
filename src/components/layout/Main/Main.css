@@ -9,7 +9,9 @@ main.page-container {
 
 main.my-list-page,
 main.search-page,
-main.recipes-page {
+main.recipes-page,
+main.new-popular-page .page-header,
+main.browse-region-page .page-header {
   padding-left: 3%;
   padding-right: 3%;
 }
@@ -21,8 +23,9 @@ main.page-container h1 {
   font-weight: 600;
 }
 
-main.new-popular-page h1 {
-  padding-left: 3%;
+main.new-popular-page .page-header h1,
+main.browse-region-page .page-header h1 {
+  margin: 0;
 }
 
 .page-header h1 span {

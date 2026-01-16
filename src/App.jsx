@@ -11,7 +11,6 @@ import SearchResult from "./pages/SearchResult/SearchResult";
 import FullView from "./pages/FullView/FullView";
 import Error from "./pages/Error/Error";
 import NotFound from "./pages/NotFound/NotFound";
-import "./App.css";
 
 const App = () => {
   return (
