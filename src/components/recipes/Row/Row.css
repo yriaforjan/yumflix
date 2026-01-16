@@ -22,6 +22,7 @@
 .row-carrousel {
   padding: 15px 3%;
   display: flex;
+  gap: 10px;
   overflow-y: hidden;
   overflow-x: scroll;
   scrollbar-width: none;
@@ -34,14 +35,12 @@
 }
 
 .row-item-wrapper {
-  margin-right: 0.3px;
   z-index: 1;
   transition: z-index 0s;
 }
 
 .row-item-wrapper .card-skeleton-container {
   width: 250px;
-  margin-right: 10px;
 }
 
 .slider-arrow {

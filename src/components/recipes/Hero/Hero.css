@@ -37,7 +37,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  max-width: 600px;
+  max-width: 650px;
   z-index: 10;
 }
 

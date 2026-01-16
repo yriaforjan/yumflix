@@ -120,7 +120,7 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
           height="155"
         />
         <div className="card-overlay">
-          <h4 className="card-main-title">{recipe.title}</h4>
+          <h3 className="card-main-title">{recipe.title}</h3>
         </div>
       </div>
 
