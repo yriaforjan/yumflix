@@ -13,16 +13,6 @@ const Modal = () => {
 
   useBodyScrollLock(isOpen);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape" && isOpen) {
-        closeModal();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, closeModal]);
-
   if (!isOpen || !content) return null;
 
   const isInList = myList.some((item) => item.id === content.id);
@@ -88,7 +78,7 @@ const Modal = () => {
             <div className="modal-left-col">
               <div className="modal-meta-row">
                 <span className="match-score">{content.match}% Match</span>
-                <span>{content ? content.area : ""}</span>
+                <span>{content.area}</span>
               </div>
               <p className="modal-description">
                 {content.description
@@ -107,7 +97,7 @@ const Modal = () => {
                       .join(", ")
                     : "See full details..."}
                   {content.ingredients &&
-                    content.ingredients.length > 6 &&
+                    content.ingredients.length > 5 &&
                     "..."}
                 </span>
               </div>
