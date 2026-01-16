@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLoader } from "../../context/LoaderContext/LoaderContext";
+import useImagePreload from "../../hooks/useImagePreload";
 import "./Error.css";
 
 const Error = () => {
   const { setIsLoading } = useLoader();
-  const [imgReady, setImgReady] = useState(false);
+  const isReady = useImagePreload("/not_found.webp");
 
   useEffect(() => {
     setIsLoading(false);
-    const img = new Image();
-    img.src = "/src/assets/not_found.webp";
-    img.onload = () => {
-      setImgReady(true);
-    };
   }, [setIsLoading]);
 
   const handleReload = () => {
@@ -20,7 +16,7 @@ const Error = () => {
   };
 
   return (
-    <div className={`error-container ${imgReady ? "visible" : ""}`}>
+    <div className={`error-container ${isReady ? "visible" : ""}`}>
       <h1>Oops!</h1>
       <h2>Unexpected Error</h2>
       <p className="error-message">

@@ -10,7 +10,7 @@
   color: var(--text-primary);
   padding: 20px;
   background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-    url("/src/assets/not_found.webp");
+    url("/not_found.webp");
   background-size: cover;
   background-position: center;
   opacity: 0;
