@@ -5,11 +5,12 @@ import Main from "./components/layout/Main/Main";
 import Home from "./pages/Home/Home";
 import AllRecipes from "./pages/AllRecipes/AllRecipes";
 import MyList from "./pages/MyList/MyList";
-import FullView from "./pages/FullView/FullView";
-import NotFound from "./pages/NotFound/NotFound";
 import NewAndPopular from "./pages/NewAndPopular/NewAndPopular";
+import BrowseByRegion from "./pages/BrowseByRegion/BrowseByRegion";
 import SearchResult from "./pages/SearchResult/SearchResult";
+import FullView from "./pages/FullView/FullView";
 import Error from "./pages/Error/Error";
+import NotFound from "./pages/NotFound/NotFound";
 import "./App.css";
 
 const App = () => {
@@ -23,7 +24,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="recipes" element={<AllRecipes />} />
           <Route path="my-list" element={<MyList />} />
-          <Route path="new" element={<NewAndPopular />} />
+          <Route path="latest" element={<NewAndPopular />} />
+          <Route path="browse-region" element={<BrowseByRegion />} />
           <Route path="search" element={<SearchResult />} />
         </Route>
         {/* Rutas SIN Header: */}

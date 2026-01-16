@@ -80,7 +80,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/new"
+                to="/latest"
                 onClick={closeMenu}
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
@@ -102,7 +102,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/countries"
+                to="/browse-region"
                 onClick={closeMenu}
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"

@@ -1,9 +1,9 @@
 footer {
   background-color: var(--bg);
   color: var(--text-secondary);
-  padding: 70px 4% 40px;
+  padding: 70px 3% 20px;
   border-top: 8px solid var(--border-color);
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .footer-container {
