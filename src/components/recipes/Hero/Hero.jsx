@@ -16,22 +16,26 @@ const Hero = () => {
   const { openModal, openFullView } = useModal();
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchRandomMeal = async () => {
       try {
         const data = await getRandomMeal();
-        if (data) {
-          setRecipe(data);
-        } else {
-          navigate("/error");
+        if (isMounted) {
+          if (data) setRecipe(data);
+          else navigate("/error");
         }
       } catch (error) {
         console.error("Hero Error:", error);
-        navigate("/error");
+        if (isMounted) navigate("/error");
       } finally {
-        appLoaded();
+        if (isMounted) appLoaded();
       }
     };
     fetchRandomMeal();
+    return () => {
+      isMounted = false;
+    };
   }, [appLoaded, navigate]);
 
   if (!recipe) return <HeroSkeleton />;
@@ -39,13 +43,16 @@ const Hero = () => {
   const tags = createRecipeTags(recipe, 2);
 
   return (
-    <section
-      className="hero"
-      aria-label="Featured Recipe"
-      style={{
-        "--bg-image": `url("${recipe.image}")`,
-      }}
-    >
+    <section className="hero" aria-label="Featured Recipe">
+      <img
+        src={recipe.image}
+        alt={recipe.title}
+        className="hero-bg-img"
+        loading="eager"
+        fetchPriority="high"
+        decoding="sync"
+      />
+
       <div className="hero-content">
         <h1 className="hero-title">{recipe.title.toUpperCase()}</h1>
 

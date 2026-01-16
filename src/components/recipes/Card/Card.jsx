@@ -28,13 +28,25 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
   const isLiked = favorites.includes(recipe.id);
 
   useEffect(() => {
+    let isMounted = true;
+
     if (isHovered && !details) {
       const fetchDetails = async () => {
-        const fullDetails = await getMealById(recipe.id);
-        setDetails(fullDetails);
+        try {
+          const fullDetails = await getMealById(recipe.id);
+          if (isMounted) {
+            setDetails(fullDetails);
+          }
+        } catch (error) {
+          console.error("Error fetching details:", error);
+        }
       };
       fetchDetails();
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isHovered, details, recipe.id]);
 
   const handleMouseEnter = (ev) => {
@@ -98,7 +110,15 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
       aria-label={`View details for ${recipe.title}`}
     >
       <div className="card-image-wrapper">
-        <img src={recipe.image} alt="" className="card-img" />
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          className="card-img"
+          loading="lazy"
+          decoding="async"
+          width="250"
+          height="155"
+        />
         <div className="card-overlay">
           <h4 className="card-main-title">{recipe.title}</h4>
         </div>
@@ -117,7 +137,13 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
             onMouseLeave={handleMouseLeave}
           >
             <div className="modal-img-container">
-              <img src={recipe.image} alt={recipe.title} />
+              <img
+                src={recipe.image}
+                alt={recipe.title}
+                width="450"
+                height="253"
+                loading="eager"
+              />
             </div>
 
             <div className="card-info">
@@ -125,7 +151,10 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                 <div className="left-actions">
                   <button
                     className="icon-btn filled"
-                    onClick={() => openFullView(source)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Evita activar el click de la card padre
+                      openFullView(source);
+                    }}
                     title="Play"
                     aria-label="Play"
                   >
@@ -134,7 +163,10 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
 
                   <button
                     className={`icon-btn ${isInList ? "added" : ""}`}
-                    onClick={() => toggleMyList(source)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleMyList(source);
+                    }}
                     title={isInList ? "Remove from My List" : "Add to My List"}
                     aria-label={
                       isInList ? "Remove from My List" : "Add to My List"
@@ -145,7 +177,10 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
 
                   <button
                     className={`icon-btn ${isLiked ? "liked" : ""}`}
-                    onClick={() => toggleLike(recipe.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleLike(recipe.id);
+                    }}
                     title={isLiked ? "Unlike" : "Like"}
                     aria-label={isLiked ? "Unlike" : "Like"}
                   >
@@ -155,7 +190,10 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                 <div className="right-actions">
                   <button
                     className="icon-btn"
-                    onClick={() => openModal(source)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openModal(source);
+                    }}
                     title="More info"
                     aria-label="More info"
                   >
