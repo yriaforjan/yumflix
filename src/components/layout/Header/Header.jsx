@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import logo from "../../../assets/logo.png";
+import logo from "../../../assets/logo.webp";
 import SearchBar from "../../SearchBar/SearchBar";
 import ThemeToggle from "../../ThemeToggle/ThemeToggle";
 import { FaBars, FaTimes } from "react-icons/fa";

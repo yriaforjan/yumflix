@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useLoader } from "../../context/LoaderContext/LoaderContext";
-import logoY from "../../assets/logo_y.png";
+import loaderLogo from "../../assets/loader.webp";
 import useBodyScrollLock from "../../hooks/useBodyScrollLock";
 import "./GlobalLoader.css";
 
@@ -21,7 +21,7 @@ const GlobalLoader = () => {
 
   return (
     <div className="loader-overlay visible">
-      <img src={logoY} alt="Yumflix" className="loader-logo" />
+      <img src={loaderLogo} alt="Yumflix loader" className="loader-logo" />
     </div>
   );
 };
