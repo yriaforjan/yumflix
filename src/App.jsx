@@ -8,6 +8,7 @@ import MyList from "./pages/MyList/MyList";
 import NewAndPopular from "./pages/NewAndPopular/NewAndPopular";
 import BrowseByRegion from "./pages/BrowseByRegion/BrowseByRegion";
 import SearchResult from "./pages/SearchResult/SearchResult";
+import Contact from "./pages/Contact/Contact";
 import FullView from "./pages/FullView/FullView";
 import Error from "./pages/Error/Error";
 import NotFound from "./pages/NotFound/NotFound";
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="latest" element={<NewAndPopular />} />
           <Route path="browse-region" element={<BrowseByRegion />} />
           <Route path="search" element={<SearchResult />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
         {/* Rutas SIN Header: */}
         <Route path="/watch/:id" element={<FullView />} />

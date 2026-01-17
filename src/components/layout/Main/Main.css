@@ -7,9 +7,7 @@ main.page-container {
   padding-bottom: 40px;
 }
 
-main.my-list-page,
-main.search-page,
-main.recipes-page,
+main.page-padding,
 main.new-popular-page .page-header,
 main.browse-region-page .page-header {
   padding-left: 3%;
@@ -24,8 +22,9 @@ main.page-container h1 {
 }
 
 main.new-popular-page .page-header h1,
-main.browse-region-page .page-header h1 {
-  margin: 0;
+main.browse-region-page .page-header h1,
+main.contact-page .page-header h1 {
+  margin-bottom: 0;
 }
 
 .page-header h1 span {

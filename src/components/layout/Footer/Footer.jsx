@@ -36,7 +36,7 @@ const Footer = () => {
         <div className="footer-grid">
           <ul className="footer-links" aria-label="Footer Navigation">
             <li className="footer-link-item">
-              <Link to="#" className="footer-link">
+              <Link to="/contact" className="footer-link">
                 Contact Us
               </Link>
             </li>

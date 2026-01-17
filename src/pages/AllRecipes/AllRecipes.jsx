@@ -43,7 +43,7 @@ const AllRecipes = () => {
   }, [navigate]);
 
   return (
-    <main className="page-container recipes-page">
+    <main className="page-container page-padding recipes-page">
       <h1>All Recipes from A to Z</h1>
 
       <Grid recipes={recipes} isLoading={isLoading} />

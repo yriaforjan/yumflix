@@ -43,7 +43,7 @@ const SearchResult = () => {
   }, [query, navigate]);
 
   return (
-    <main className="page-container search-page">
+    <main className="page-container page-padding search-page">
       <div className="page-header">
         <h1>
           Results for: <span>{query}</span>

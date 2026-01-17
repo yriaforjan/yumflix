@@ -1,0 +1,116 @@
+main.contact-page .page-header {
+  flex-direction: column;
+  align-items: start;
+}
+
+.contact-page p {
+  font-size: 1.1rem;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 450px;
+  margin: 60px auto;
+  background-color: var(--bg-card);
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  background-color: var(--bg-button);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 16px;
+  background-color: var(--brand);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+}
+
+.submit-btn:hover {
+  filter: brightness(1.1);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+.form-message {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.form-message.success {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #81c784;
+  border: 1px solid #2e7d32;
+}
+
+.form-message.error {
+  background-color: rgba(211, 47, 47, 0.2);
+  color: #e57373;
+  border: 1px solid #d32f2f;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -5,7 +5,7 @@ const MyList = () => {
   const { myList } = useUser();
 
   return (
-    <main className="page-container my-list-page">
+    <main className="page-container page-padding my-list-page">
       <h1>My List</h1>
 
       <Grid
