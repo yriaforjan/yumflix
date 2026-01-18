@@ -12,15 +12,31 @@ const SearchBar = () => {
   const [returnPath, setReturnPath] = useState("/");
 
   const query = new URLSearchParams(location.search).get("q") || "";
+  const [searchTerm, setSearchTerm] = useState(query);
 
   const isOpen = query.length > 0 || isManualFocused;
   const hasText = query.length > 0;
 
   useEffect(() => {
-    if (inputRef.current && inputRef.current.value !== query) {
-      inputRef.current.value = query;
-    }
+    setSearchTerm(query);
   }, [query]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchTerm !== query) {
+        if (searchTerm.length > 0) {
+          navigate(`/search?q=${encodeURIComponent(searchTerm)}`, {
+            replace: true,
+          });
+        } else if (searchTerm.length === 0 && query.length > 0) {
+          setIsManualFocused(false);
+          navigate(returnPath, { replace: true });
+        }
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm, query, navigate, returnPath]);
 
   const handleInputChange = (ev) => {
     const value = ev.target.value;
@@ -29,12 +45,7 @@ const SearchBar = () => {
       setReturnPath(location.pathname);
     }
 
-    if (value.length > 0) {
-      navigate(`/search?q=${encodeURIComponent(value)}`, { replace: true });
-    } else if (value.length === 0) {
-      setIsManualFocused(false);
-      navigate(returnPath, { replace: true });
-    }
+    setSearchTerm(value);
   };
 
   const handleSearchClick = () => {

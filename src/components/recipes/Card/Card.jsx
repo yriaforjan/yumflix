@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 import {
   FaPlay,
   FaPlus,
@@ -152,7 +152,7 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
                   <button
                     className="icon-btn filled"
                     onClick={(e) => {
-                      e.stopPropagation(); // Evita activar el click de la card padre
+                      e.stopPropagation();
                       openFullView(source);
                     }}
                     title="Play"
@@ -224,4 +224,4 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
   );
 };
 
-export default Card;
+export default memo(Card);
