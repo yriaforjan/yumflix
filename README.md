@@ -61,6 +61,7 @@ You can explore the live application here:
 * **Global Recipe Discovery**: Browse recipes by geographic region with sorting options and persistent filter state
 * **Personal List**: Save favorite recipes to your personal list with localStorage persistence and visual feedback
 * **Full Responsiveness**: Seamless experience across mobile, tablet, and desktop devices with optimized layouts for every screen size
+* **Performance Optimization**: Strategic use of `React.memo`, search debouncing, and Split Context architecture for a lag-free experience.
 
 ---
 
@@ -95,6 +96,7 @@ Global state managed through React Context API, ensuring a clean state flow with
 * **ModalContext**: Modal visibility and content management.
 * **UserContext**: Personal list and favorites with `localStorage` persistence.
 * **LoaderContext**: Coordinated loading states across the application.
+* **Split Context Pattern**: Decoupled **State** and **Actions** to minimize unnecessary re-renders in static components across the application.
 
 > **Note**: Following strict linting rules, all contexts are decoupled from their providers to prevent circular dependencies and improve testability.
 
