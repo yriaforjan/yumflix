@@ -1,5 +1,5 @@
 import { FaSearch, FaTimes } from "react-icons/fa";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./SearchBar.css";
 
@@ -15,7 +15,7 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState(query);
 
   const isOpen = query.length > 0 || isManualFocused;
-  const hasText = query.length > 0;
+  const hasText = searchTerm.length > 0;
 
   useEffect(() => {
     setSearchTerm(query);
@@ -34,21 +34,18 @@ const SearchBar = () => {
         }
       }
     }, 400);
-
     return () => clearTimeout(timer);
   }, [searchTerm, query, navigate, returnPath]);
 
   const handleInputChange = (ev) => {
     const value = ev.target.value;
-
     if (value.length > 0 && !location.pathname.includes("/search")) {
       setReturnPath(location.pathname);
     }
-
     setSearchTerm(value);
   };
 
-  const handleSearchClick = () => {
+  const handleSearchClick = useCallback(() => {
     if (!isOpen) {
       if (!location.pathname.includes("/search")) {
         setReturnPath(location.pathname);
@@ -59,13 +56,13 @@ const SearchBar = () => {
       setIsManualFocused(false);
       navigate(returnPath, { replace: true });
     }
-  };
+  }, [isOpen, hasText, location.pathname, navigate, returnPath]);
 
-  const handleClearClick = () => {
+  const handleClearClick = useCallback(() => {
     setIsManualFocused(false);
-    if (inputRef.current) inputRef.current.value = "";
+    setSearchTerm("");
     navigate(returnPath, { replace: true });
-  };
+  }, [navigate, returnPath]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -80,8 +77,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className={`search-box ${isOpen ? "open" : ""} ${hasText ? "has-text" : ""
-        }`}
+      className={`search-box ${isOpen ? "open" : ""} ${hasText ? "has-text" : ""}`}
       role="search"
     >
       <button
@@ -101,12 +97,10 @@ const SearchBar = () => {
         className="search-input"
         placeholder="Recipes, areas, ingredients"
         aria-label="Search recipes, areas, ingredients"
-        defaultValue={query}
+        value={searchTerm}
         onChange={handleInputChange}
         onFocus={() => setIsManualFocused(true)}
-        onBlur={() => {
-          setTimeout(() => setIsManualFocused(false), 200);
-        }}
+        onBlur={() => setTimeout(() => setIsManualFocused(false), 200)}
       />
 
       {hasText && (
@@ -114,7 +108,6 @@ const SearchBar = () => {
           className="clear-btn"
           onClick={handleClearClick}
           type="button"
-          onMouseDown={(e) => e.preventDefault()}
           aria-label="Clear search"
         >
           <FaTimes />
