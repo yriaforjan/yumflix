@@ -1,15 +1,17 @@
 import { FaTimes, FaPlay, FaPlus, FaCheck, FaThumbsUp } from "react-icons/fa";
-import { useModal } from "../../../context/ModalContext/ModalContext";
-import { useUser } from "../../../context/UserContext/UserContext";
+import { useModalData, useModalActions } from "../../../context/ModalContext/ModalContext";
+import { useUserData, useUserActions } from "../../../context/UserContext/UserContext";
 import { truncateText } from "../../../utils/formatters";
 import Portal from "../../Portal/Portal";
 import useBodyScrollLock from "../../../hooks/useBodyScrollLock";
 import "./Modal.css";
 
 const Modal = () => {
-  const { isOpen, closeModal, content, openFullView } = useModal();
+  const { isOpen, content } = useModalData();
+  const { closeModal, openFullView } = useModalActions();
 
-  const { myList, favorites, toggleMyList, toggleLike } = useUser();
+  const { myList, favorites } = useUserData();
+  const { toggleMyList, toggleLike } = useUserActions();
 
   useBodyScrollLock(isOpen);
 

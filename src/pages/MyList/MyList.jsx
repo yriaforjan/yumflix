@@ -1,8 +1,8 @@
-import { useUser } from "../../context/UserContext/UserContext";
+import { useUserData } from "../../context/UserContext/UserContext";
 import Grid from "../../components/recipes/Grid/Grid";
 
 const MyList = () => {
-  const { myList } = useUser();
+  const { myList } = useUserData();
 
   return (
     <main className="page-container page-padding my-list-page">

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { UserContext } from "./UserContext";
+import { UserDataContext, UserActionsContext } from "./UserContext";
 
 export const UserProvider = ({ children }) => {
   // Inicializamos los estados leyendo de localStorage
@@ -41,17 +41,27 @@ export const UserProvider = ({ children }) => {
     );
   }, []);
 
-  const value = useMemo(
+  const data = useMemo(
     () => ({
       myList,
       favorites,
+    }),
+    [myList, favorites]
+  );
+
+  const actions = useMemo(
+    () => ({
       toggleMyList,
       toggleLike,
     }),
-    [myList, favorites, toggleMyList, toggleLike]
+    [toggleMyList, toggleLike]
   );
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <UserActionsContext.Provider value={actions}>
+      <UserDataContext.Provider value={data}>{children}</UserDataContext.Provider>
+    </UserActionsContext.Provider>
+  );
 };
 
 export default UserProvider;

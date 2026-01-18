@@ -7,8 +7,8 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import { getMealById } from "../../../services/api";
-import { useModal } from "../../../context/ModalContext/ModalContext";
-import { useUser } from "../../../context/UserContext/UserContext";
+import { useModalActions } from "../../../context/ModalContext/ModalContext";
+import { useUserData, useUserActions } from "../../../context/UserContext/UserContext";
 import { createRecipeTags } from "../../../utils/formatters";
 import useSmartPosition from "../../../hooks/useSmartPosition";
 import Portal from "../../Portal/Portal";
@@ -20,9 +20,9 @@ const Card = ({ recipe, isHovered, setHoveredCardId }) => {
   const leaveTimer = useRef(null);
 
   const { coords, origin, calculatePosition } = useSmartPosition();
-  const { openModal, openFullView } = useModal();
-
-  const { myList, favorites, toggleMyList, toggleLike } = useUser();
+  const { openModal, openFullView } = useModalActions();
+  const { myList, favorites } = useUserData();
+  const { toggleMyList, toggleLike } = useUserActions();
 
   const isInList = myList.some((item) => item.id === recipe.id);
   const isLiked = favorites.includes(recipe.id);

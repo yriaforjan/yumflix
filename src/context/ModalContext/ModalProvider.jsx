@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "./ModalContext";
+import { ModalDataContext, ModalActionsContext } from "./ModalContext";
 
 const ModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,21 +26,29 @@ const ModalProvider = ({ children }) => {
     [navigate]
   );
 
-  const value = useMemo(
+  const data = useMemo(
     () => ({
       isOpen,
       content,
+    }),
+    [isOpen, content]
+  );
+
+  const actions = useMemo(
+    () => ({
       openModal,
       openFullView,
       closeModal,
     }),
-    [isOpen, content, openModal, openFullView, closeModal]
+    [openModal, openFullView, closeModal]
   );
 
   return (
-    <ModalContext.Provider value={value}>
-      {children}
-    </ModalContext.Provider>
+    <ModalActionsContext.Provider value={actions}>
+      <ModalDataContext.Provider value={data}>
+        {children}
+      </ModalDataContext.Provider>
+    </ModalActionsContext.Provider>
   );
 };
 

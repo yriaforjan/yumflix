@@ -3,7 +3,7 @@ import { FaPlay, FaInfoCircle } from "react-icons/fa";
 import { getRandomMeal } from "../../../services/api";
 import { createRecipeTags, truncateText } from "../../../utils/formatters";
 import { useLoader } from "../../../context/LoaderContext/LoaderContext";
-import { useModal } from "../../../context/ModalContext/ModalContext";
+import { useModalActions } from "../../../context/ModalContext/ModalContext";
 import { useNavigate } from "react-router-dom";
 import HeroSkeleton from "./HeroSkeleton";
 import "./Hero.css";
@@ -13,7 +13,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const { appLoaded } = useLoader();
-  const { openModal, openFullView } = useModal();
+  const { openModal, openFullView } = useModalActions();
 
   useEffect(() => {
     let isMounted = true;
