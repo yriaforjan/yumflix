@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-/* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA Y CAMBIAR A USECONTEXT */
+/* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA. Y USECONTEXT? REACT QUERY????????? */
 export const cache = {
   categories: {},
   areas: {},
