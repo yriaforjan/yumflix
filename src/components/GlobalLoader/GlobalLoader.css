@@ -1,6 +1,7 @@
 .loader-overlay {
   position: fixed;
-  max-height: 100vh;
+  max-height: 100vh; /* lo dejo de respaldo */
+  max-height: 100dvh; /* para móvil */
   top: 0;
   left: 0;
   width: 100vw;
