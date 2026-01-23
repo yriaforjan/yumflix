@@ -7,14 +7,12 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-/* PREGUNTAR A ANTONIO SI ESTO ES UNA GUARRADA. Y USECONTEXT? REACT QUERY????????? */
 export const cache = {
   categories: {},
   areas: {},
   random: null,
   fullCatalog: null,
 };
-/* ------ */
 
 // Obtener receta aleatoria -> hero
 export const getRandomMeal = async () => {
@@ -22,9 +20,7 @@ export const getRandomMeal = async () => {
 
   try {
     const res = await api.get("random.php");
-    const meal = res.data.meals
-      ? normalizeMeal(res.data.meals[0])
-      : null;
+    const meal = res.data.meals ? normalizeMeal(res.data.meals[0]) : null;
     cache.random = meal;
     return meal;
   } catch (error) {
@@ -39,9 +35,7 @@ export const getMealsByCategory = async (category) => {
   try {
     // endpoint: filter.php?c=NombreCategoria
     const res = await api.get(`filter.php?c=${category}`);
-    const meals = res.data.meals
-      ? res.data.meals.map(normalizeMeal)
-      : [];
+    const meals = res.data.meals ? res.data.meals.map(normalizeMeal) : [];
     cache.categories[category] = meals;
     return meals;
   } catch (error) {
@@ -87,7 +81,7 @@ export const getRecipesByTerm = async (term) => {
     ];
 
     const uniqueMeals = Array.from(
-      new Map(combinedResults.map((meal) => [meal.idMeal, meal])).values()
+      new Map(combinedResults.map((meal) => [meal.idMeal, meal])).values(),
     );
 
     return uniqueMeals.map(normalizeMeal);
@@ -124,7 +118,7 @@ export const getAllRecipes = async () => {
       .filter((meal) => meal && meal !== null);
 
     const uniqueMeals = Array.from(
-      new Map(allMeals.map((meal) => [meal.idMeal, meal])).values()
+      new Map(allMeals.map((meal) => [meal.idMeal, meal])).values(),
     );
 
     const normalizedData = uniqueMeals.map(normalizeMeal);
@@ -156,9 +150,7 @@ export const getMealsByArea = async (area) => {
 
   try {
     const res = await api.get(`filter.php?a=${area}`);
-    const meals = res.data.meals
-      ? res.data.meals.map(normalizeMeal)
-      : [];
+    const meals = res.data.meals ? res.data.meals.map(normalizeMeal) : [];
 
     cache.areas[area] = meals;
     return meals;

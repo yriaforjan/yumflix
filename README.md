@@ -1,6 +1,6 @@
 # 🍿 Yumflix - Unlimited Recipes, Cinematic Cooking
 
-[![Status](https://img.shields.io/badge/Status-Under%20Review-orange.svg)](https://github.com/yriaforjan/yumflix)
+[![Status](https://img.shields.io/badge/Status-Completed-success.svg)](https://github.com/yriaforjan/yumflix)
 
 ## 🌟 Project Description
 
